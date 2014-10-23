@@ -1,0 +1,14 @@
+# Turn on URL rewriting
+RewriteEngine On
+
+# Web Directory
+RewriteBase /
+
+# Protect certain folders from being viewed
+#RewriteRule ^(protected|directories) - [F,L]
+
+# Rewrite URLs to index.php/URL
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule . index.php [L]
