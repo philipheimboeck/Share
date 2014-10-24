@@ -11,6 +11,5 @@
     "require": {
         "doctrine/orm": "*"
     },
-    "minimum-stability": "dev",
-    "target-dir": "share/share-framework"
+    "minimum-stability": "dev"
 }
