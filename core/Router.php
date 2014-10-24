@@ -5,6 +5,11 @@
  * Date: 23.10.14
  * Time: 12:10
  */
+
+namespace core;
+
+use ReflectionMethod;
+
 class Router
 {
 
@@ -12,21 +17,21 @@ class Router
 
     function __construct()
     {
-        $this->service_loader = new ServiceLoader();
+        $this->service_loader = new ClassLoader();
     }
 
-    public function getServiceRoute($http_method, $uri)
+    public function getControllerRoute($http_method, $uri)
     {
         return $http_method . ':' . $uri;
     }
 
 
-    public function getService($service_route, $params)
+    public function callController($controller_route, $params)
     {
         $map = $this->service_loader->loadPaths();
 
-        if (array_key_exists($service_route, $map)) {
-            $tmp = $map[$service_route];
+        if (array_key_exists($controller_route, $map)) {
+            $tmp = $map[$controller_route];
 
             /** @var ReflectionMethod $method */
             $method = $tmp[0];
@@ -39,12 +44,12 @@ class Router
                 $default_params[$key] = $value;
             }
 
-            return $this->invoke_method($method, $service, $template, $default_params);
+            return $this->invoke_controller($method, $service, $template, $default_params);
         }
         return false;
     }
 
-    private function invoke_method(ReflectionMethod $method, $service, $template, $params)
+    private function invoke_controller(ReflectionMethod $method, $service, $template, $params)
     {
         // Invoke the method
         $result = $method->invokeArgs($service, $params);
