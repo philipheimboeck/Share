@@ -11,11 +11,6 @@
     "require": {
         "doctrine/orm": "*"
     },
-    "minimum-stability": "stable",
-    "target-dir": "share/share-framework",
-    "extra": {
-        "branch-alias": {
-            "dev-master" : "dev-master"
-        }
-    }
+    "minimum-stability": "dev",
+    "target-dir": "share/share-framework"
 }
